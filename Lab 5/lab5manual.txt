@@ -1,0 +1,23 @@
+Your logic functions for the lab experiment
+The logic functions you are to realize, for both this prelab as well as the lab are as follows:
+
+F0(R,S,T,U) = R'·S·T'·U + R·S·T'·U' + R·S·T·U
+F1(R,S,T,U) = R·S'·T'·U' + R·S'·T·U' + R·S'·T·U
+F2(R,S,T,U) = R'·S'·T'·U + R'·S·T·U' + R'·S·T·U
+F3(R,S,T,U) = R'·S'·T·U' + R'·S·T'·U' + R·S·T'·U
+F4(R,S,T,U) = R'·S'·T'·U' + R'·S'·T·U + R·S'·T'·U
+F5(R,S,T,U) = R'·S'·T'·U + R'·S'·T·U' + R'·S'·T·U + R'·S·T'·U' + R'·S·T'·U + R'·S·T·U' + R'·S·T·U + R·S'·T'·U' + R·S'·T·U' + R·S'·T·U + R·S·T'·U' + R·S·T'·U + R·S·T·U' + R·S·T·U
+F6(R,S,T,U) = R'·S'·T'·U' + R'·S'·T'·U + R'·S·T'·U' + R'·S·T'·U + R'·S·T·U' + R'·S·T·U + R·S'·T'·U' + R·S'·T'·U + R·S'·T·U' + R·S'·T·U + R·S·T'·U' + R·S·T'·U + R·S·T·U' + R·S·T·U
+F7(R,S,T,U) = R'·S'·T'·U' + R'·S'·T'·U + R'·S'·T·U' + R'·S'·T·U + R'·S·T'·U + R'·S·T·U' + R'·S·T·U + R·S'·T'·U' + R·S'·T'·U + R·S'·T·U' + R·S'·T·U + R·S·T'·U' + R·S·T·U' + R·S·T·U
+To implement this, recognize that each constituent product term can be translated to a minterm number. For an active-low decoder, each result can be represented by the NAND of the inverted outputs. When there are many terms, the complement of the function can be more easily implemented by using an AND gate.
+
+Implement these functions in the top module of your design as follows:
+
+Use pb[3:0] represent R,S,T, and U, respectively.
+Add the SystemVerilog model of the 74HC138 to your design. Create two instances of it, and wire their enable pins to form a 4-to-16 decoder.
+Create a single 16-bit output bus named p (for product terms) and connect the appropriate halves of it to the outputs of the hc138 instances.
+Create dataflow expressions to form NAND expressions of the p elements. For each expression that has more than three product terms, implement it using an AND of the appropriate product terms.
+Represent the F7, F6, ... F1, F0 results on right[7:0].
+Test your outputs to ensure that all eight outputs are activated for the proper combinations of buttons 3,2,1,0.
+
+Development hint: To get started, you may wish to wire the outputs of the two hc138 instances to {left,right} just to make sure that you have properly created a 4-to-16 decoder with active-low outputs. No matter what combinations buttons 3,2,1,0 are in, one and only one of the 16 left and right LEDs should be off for such a system. Be sure to disconnect the left and right LEDs before implementing your logic functions.
